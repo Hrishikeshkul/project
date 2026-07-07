@@ -57,7 +57,7 @@ stage('Docker Push') {
 
         docker pull 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123:latest
         docker rm -f loginwebapp || true
-        docker run -d -p 8080:8080 --name loginwebapp 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123/loginwebapp:latest
+        docker run -d -p 8080:8080 --name loginwebapp 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123:latest
         '''
 }
       }
