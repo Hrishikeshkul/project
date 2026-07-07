@@ -32,6 +32,14 @@ pipeline {
                 '''
             }
         }
+stage('Docker Push') {
+    steps {
+        sh '''
+        docker tag loginwebapp:latest 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123/loginwebapp:latest
+        docker push 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123/loginwebapp:latest
+        '''
+    }
+}
 
       stage('DEPLOY ON SLAVE') {
             agent {
@@ -40,12 +48,13 @@ pipeline {
                     customWorkspace '/mnt/jenkins-slave'
                 }
             }
-      steps {
-                sh '''
-                docker rm -f loginwebapp || true
-                docker run -d -p 8080:8080 --name loginwebapp loginwebapp:latest
-                '''
-            }
+     steps {
+        sh '''
+        docker pull 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123/loginwebapp:latest
+        docker rm -f loginwebapp || true
+        docker run -d -p 8080:8080 --name loginwebapp 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123/loginwebapp:latest
+        '''
+}
       }
       }
 }
