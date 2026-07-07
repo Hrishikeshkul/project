@@ -35,6 +35,8 @@ pipeline {
 stage('Docker Push') {
     steps {
         sh '''
+        aws ecr get-login-password --region ap-south-1 | \
+        docker login --username AWS --password-stdin 986485679221.dkr.ecr.ap-south-1.amazonaws.com
         docker tag loginwebapp:latest 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123/loginwebapp:latest
         docker push 986485679221.dkr.ecr.ap-south-1.amazonaws.com/myecrrepo123/loginwebapp:latest
         '''
