@@ -23,7 +23,7 @@ pipeline {
 
                 ansible-playbook \
                   -i inventory \
-                  ansible-war.yaml
+                  ansible.yaml
                 '''
             }
         }
@@ -31,7 +31,7 @@ pipeline {
         stage('Verify Deployment') {
             steps {
                 sh '''
-                curl -f http://172.31.11.148:8080/LoginWebApp
+                curl -f http://13.201.40.192:8080/LoginWebApp
                 '''
             }
         }
