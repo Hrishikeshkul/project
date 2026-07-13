@@ -6,7 +6,7 @@
   vars:
     war_name: LoginWebApp.war
     app_name: LoginWebApp
-    tomcat_path: /opt/tomcat
+    tomcat_path: /mnt/apache-tomcat-10.1.57
 
   tasks:
 
