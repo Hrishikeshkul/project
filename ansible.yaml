@@ -9,11 +9,9 @@
     tomcat_path: /mnt/apache-tomcat-10.1.57
 
   tasks:
-
     - name: Stop Tomcat
-      systemd:
-        name: tomcat
-        state: stopped
+      shell: "{{ tomcat_path }}/bin/shutdown.sh"
+      ignore_errors: yes
 
     - name: Remove old WAR
       file:
@@ -31,14 +29,8 @@
         dest: "{{ tomcat_path }}/webapps/{{ war_name }}"
         owner: tomcat
         group: tomcat
-        mode: '0644'
+        mode: "0644"
 
     - name: Start Tomcat
-      systemd:
-        name: tomcat
-        state: started
+      shell: "{{ tomcat_path }}/bin/startup.sh"
 
-    - name: Check Tomcat
-      systemd:
-        name: tomcat
-        state: started
