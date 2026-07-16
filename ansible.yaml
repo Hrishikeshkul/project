@@ -1,7 +1,7 @@
 ---
 - name: Deploy WAR to Tomcat nodes
   hosts: all
-  become: yes
+  become: ec2-user
 
   vars:
     war_name: LoginWebApp.war
